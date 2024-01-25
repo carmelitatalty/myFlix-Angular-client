@@ -1,0 +1,88 @@
+<div class="main-page">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="openProfile()"
+    style="margin-right: 10px"
+  >
+    View Profile
+  </button>
+  <div class="movie-card-container">
+    <!-- <button
+    mat-raised-button
+    color="primary"
+    (click)="openProfile()"
+    style="margin-right: 10px"
+  >
+    View Profile
+  </button> -->
+
+    <!-- <div class="movie-header"> -->
+    <mat-card *ngFor="let movie of movies" class="movie-card">
+      <!-- <mat-card
+        *ngFor="let movie of movies"
+        style="flex: 1 1 auto"
+        class="movie-card"
+      > -->
+      <mat-card-header>
+        <mat-card-title>{{ movie.Title }}</mat-card-title>
+        <mat-card-subtitle
+          >Directed by: {{ movie.Director.Name }}</mat-card-subtitle
+        >
+      </mat-card-header>
+      <!-- </mat-card> -->
+      <!-- </div>  -->
+      <div class="movie-image">
+        <img
+          src="{{ movie.ImagePath }}"
+          alt="{{ movie.Title }}"
+          class="movie-image"
+        />
+      </div>
+      <div class="movie-action">
+        <mat-card-actions>
+          <div class="btn-container">
+            <button
+              mat-button
+              color="primary"
+              class="btn"
+              (click)="openGenreDialog(movie)"
+            >
+              Genre
+            </button>
+            <button
+              mat-button
+              color="primary"
+              class="btn"
+              (click)="openDirectorDialog(movie)"
+            >
+              Director
+            </button>
+            <button
+              mat-button
+              color="primary"
+              class="btn"
+              (click)="openDescriptionDialog(movie)"
+            >
+              Synopsis
+            </button>
+            <mat-icon
+              (click)="
+                user.FavoriteMovies.includes(movie._id)
+                  ? removeFavoriteMovie(movie._id)
+                  : addToFavorites(movie._id)
+              "
+              >{{
+                user.FavoriteMovies.includes(movie._id)
+                  ? "favorite"
+                  : "favorite_border"
+              }}</mat-icon
+            >
+          </div>
+        </mat-card-actions>
+      </div>
+    </mat-card>
+    <!-- </div> -->
+  </div>
+  <!-- </div> -->
+</div>

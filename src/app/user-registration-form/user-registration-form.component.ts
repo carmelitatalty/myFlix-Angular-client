@@ -17,6 +17,7 @@ import {
 } from '@angular/material/card';
 import { MatFormField } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
+import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'app-user-registration-form',
@@ -28,7 +29,8 @@ import { FormsModule } from '@angular/forms';
     MatCardContent,
     MatFormField,
     MatCardActions,
-    FormsModule
+    FormsModule,
+    MatInput,
   ],
   templateUrl: './user-registration-form.component.html',
   styleUrl: './user-registration-form.component.scss',

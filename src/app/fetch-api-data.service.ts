@@ -66,7 +66,7 @@ export class FetchApiDataService {
     return this.http
       .get<Response>(apiUrl + 'movie/' + movieGenre, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer' + token,
+          Authorization: 'Bearer ' + token,
         }),
       })
       .pipe<Response, any>(
@@ -76,14 +76,20 @@ export class FetchApiDataService {
   }
 
   public addMovieFavorite(username: string, movieId: string): Observable<any> {
+    console.log(`Add Movie Favorite ${username}:${movieId}`)
     const token = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    user.FavoriteMovies.push(movieId)
+    localStorage.setItem('user', JSON.stringify(user));
+
+    console.log(`Token: ${token}`)
     return this.http
-      .post<Response>(apiUrl + 'users/' + username + '/movies/' + movieId, {
+      .post(apiUrl + 'users/' + username + '/movies/' + movieId, null, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer' + token,
+          Authorization: 'Bearer ' + token,
         }),
       })
-      .pipe<Response, any>(
+      .pipe(
         map(this.extractResponseData),
         catchError(this.handleError)
       );
@@ -93,16 +99,25 @@ export class FetchApiDataService {
     username: string,
     movieId: string
   ): Observable<any> {
+    console.log(`Remove Movie Favorite ${username}:${movieId}`)
     const token = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+    const index = user.FavoriteMovies.indexOf(movieId);
+    if (index > -1) {
+      user.FavoriteMovies.splice(index, 1);
+    }
+    localStorage.setItem('user', JSON.stringify(user));
+
     return this.http
-      .delete<Response>(apiUrl + 'user/favorites/' + username + '/' + movieId, {
+      .delete<any>(apiUrl + 'user/favorites/' + username + '/' + movieId, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer' + token,
-        }),
+          Authorization: 'Bearer ' + token,
+        })
       })
-      .pipe<Response, any>(
+      .pipe<any, any>(
         map(this.extractResponseData),
-        catchError(this.handleError)
+        catchError(this.handleError2)
       );
   }
 
@@ -111,7 +126,7 @@ export class FetchApiDataService {
     return this.http
       .put<Response>(apiUrl + 'users/' + username, userDetails, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer' + token,
+          Authorization: 'Bearer ' + token,
         }),
       })
       .pipe<Response, any>(
@@ -125,7 +140,7 @@ export class FetchApiDataService {
     return this.http
       .delete<Response>(apiUrl + 'users/' + username, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer' + token,
+          Authorization: 'Bearer ' + token,
         }),
       })
       .pipe<Response, any>(
@@ -135,7 +150,8 @@ export class FetchApiDataService {
   }
 
   // Non-typed response extraction
-  private extractResponseData(res: Response): any {
+  private extractResponseData(res: any): any {
+    console.log(`extractResponseData ${JSON.stringify(res)}`)
     const body = res;
     return body || {};
   }
@@ -143,6 +159,19 @@ export class FetchApiDataService {
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
       console.error('Some error occurred:', error.error.message);
+    } else {
+      console.error(
+        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
+      );
+    }
+    return throwError('Something bad happened; please try again later.');
+  }
+
+  private handleError2(error: HttpErrorResponse): any {
+    if (error.error instanceof ErrorEvent) {
+      console.error('Some error occurred:', error.error.message);
+    } else if (error.status === 200) {
+      return "";
     } else {
       console.error(
         `Error Status code ${error.status}, ` + `Error body is: ${error.error}`

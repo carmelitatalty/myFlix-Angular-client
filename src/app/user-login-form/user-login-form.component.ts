@@ -17,6 +17,11 @@ import {
 } from '@angular/material/card';
 import { MatFormField } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
+
+import { MatInput } from '@angular/material/input';
+
+import { Router, RouterModule } from '@angular/router';
+
 @Component({
   selector: 'app-user-login-form',
   standalone: true,
@@ -28,6 +33,7 @@ import { FormsModule } from '@angular/forms';
     MatFormField,
     MatCardActions,
     FormsModule,
+    MatInput,
   ],
   templateUrl: './user-login-form.component.html',
   styleUrl: './user-login-form.component.scss',
@@ -38,7 +44,8 @@ export class UserLoginFormComponent implements OnInit {
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -54,7 +61,10 @@ export class UserLoginFormComponent implements OnInit {
         this.dialogRef.close(); // This will close the modal on success!
         this.snackBar.open(result, 'OK', {
           duration: 2000,
-        });      },
+        });      
+        
+        this.router.navigate(['movies']);
+      },
       (result) => {
         console.log(JSON.stringify(result));
         this.snackBar.open(result, 'OK', {

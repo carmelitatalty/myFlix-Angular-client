@@ -25,7 +25,8 @@ $myFlix-Angular-client-theme: mat.define-light-theme((
     primary: $myFlix-Angular-client-primary,
     accent: $myFlix-Angular-client-accent,
     warn: $myFlix-Angular-client-warn,
-  )
+  ),
+  background-color: $myFlix-Angular-client-primary,
 ));
 
 // Include theme styles for core and each component used in your app.
@@ -37,3 +38,9 @@ $myFlix-Angular-client-theme: mat.define-light-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+// @include mat-core-theme($candy-app-theme);
+// @include mat-button-theme($candy-app-theme);
+// @include mat-checkbox-theme($candy-app-theme);
