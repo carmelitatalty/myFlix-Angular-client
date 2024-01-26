@@ -3,6 +3,9 @@ import { Component, Inject } from '@angular/core';
 import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/material/card';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
+/**
+ * Component to show Genre information.
+ */
 @Component({
   selector: 'app-genre',
   standalone: true,

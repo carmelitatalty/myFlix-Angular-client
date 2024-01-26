@@ -7,6 +7,9 @@ import { MatFormField } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { Router } from '@angular/router';
 
+/**
+ * Component to view and edit user's profile.
+ */
 @Component({
   selector: 'app-user-profile',
   standalone: true,
@@ -40,6 +43,9 @@ export class UserProfileComponent implements OnInit {
     Birthday: this.user.Birthday.split("T")[0],
   };
 
+  /**
+   * Update user.
+   */
   updateUser():void {
     console.log('Update user')
     this.fetchApiData.editUser(this.userData.Username, this.userData).subscribe(

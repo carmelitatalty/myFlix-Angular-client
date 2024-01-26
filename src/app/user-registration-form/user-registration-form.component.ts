@@ -19,6 +19,9 @@ import { MatFormField } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 
+/**
+ * Component for user registration form.
+ */
 @Component({
   selector: 'app-user-registration-form',
   standalone: true,
@@ -38,6 +41,12 @@ import { MatInput } from '@angular/material/input';
 export class UserRegistrationFormComponent implements OnInit {
   @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
 
+  /**
+   * 
+   * @param fetchApiData api service to call API endpoints
+   * @param dialogRef reference to dialog box
+   * @param snackBar 
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
@@ -47,6 +56,9 @@ export class UserRegistrationFormComponent implements OnInit {
   ngOnInit(): void {}
 
   // This is the function responsible for sending the form inputs to the backend
+  /**
+   * Register a new user.
+   */
   registerUser(): void {
     this.fetchApiData.userRegistration(this.userData).subscribe(
       (result) => {

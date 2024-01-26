@@ -3,6 +3,9 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 
+/**
+ * Component to show director information.
+ */
 @Component({
   selector: 'app-director',
   standalone: true,

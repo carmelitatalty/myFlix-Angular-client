@@ -22,6 +22,9 @@ import { MatInput } from '@angular/material/input';
 
 import { Router, RouterModule } from '@angular/router';
 
+/**
+ * Component for user login form.
+ */
 @Component({
   selector: 'app-user-login-form',
   standalone: true,
@@ -51,6 +54,9 @@ export class UserLoginFormComponent implements OnInit {
   ngOnInit(): void {}
 
   // This is the function responsible for sending the form inputs to the backend
+  /**
+   * Log the user in.
+   */
   loginUser(): void {
     this.fetchApiData.userLogin(this.userData).subscribe(
       (result) => {

@@ -16,6 +16,9 @@ import { GenreComponent } from '../genre/genre.component';
 import { DescriptionComponent } from '../description/description.component';
 import { Router } from '@angular/router';
 
+/** 
+ * Movie card component. Displays all the movies.
+ */
 @Component({
   selector: 'app-movie-card',
   standalone: true,
@@ -46,6 +49,10 @@ export class MovieCardComponent {
     this.getMovies();
   }
 
+  /**
+   * Add move to user's favorites
+   * @param movieId movie to add as a favorite
+   */
   addToFavorites(movieId: string): void {
     this.fetchApiData
       .addMovieFavorite(this.user.Username, movieId)
@@ -54,6 +61,10 @@ export class MovieCardComponent {
       });
   }
 
+  /**
+   * Remove movie from user's favorite list.
+   * @param movieId movie to remove from favorite
+   */
   removeFavoriteMovie(movieId: string): void {
     console.log('remove favorite');
     this.fetchApiData.removeMovieFavorite(this.user.Username, movieId)
@@ -62,6 +73,9 @@ export class MovieCardComponent {
     })
   }
 
+  /**
+   * Get all movies.
+   */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -70,6 +84,10 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   * Open Synopsis dialog box.
+   * @param movie movie to show description of.
+   */
   openDescriptionDialog(movie: any): void {
     this.dialog.open(DescriptionComponent, {
       width: '280px',
@@ -80,6 +98,10 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   * Open director dialog box.
+   * @param movie movie to show director information
+   */
   openDirectorDialog(movie: any): void {
     this.dialog.open(DirectorComponent, {
       width: '280px',
@@ -92,6 +114,10 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   * Open Genre dialog box.
+   * @param movie movie to show genre of
+   */
   openGenreDialog(movie: any): void {
     this.dialog.open(GenreComponent, {
       width: '280px',
@@ -102,6 +128,9 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   * Redirect use to profile view.
+   */
   openProfile(): void {
     this.router.navigate(['profile']);
   }
