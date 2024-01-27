@@ -1,5 +1,7 @@
 # MyFlixAngularClient
 
+This project is to be a UI for the myFlix API.  It allows users to signup, login, view movies, edit profile, and manage favorites.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.0.
 
 ## Development server
